@@ -6,6 +6,8 @@ import morelights.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -62,6 +64,14 @@ public class MoreLights {
 		//SHAPELESS CRAFTING RECIPES
 		
 		//SHAPED CRAFTING RECIPES
+		
+			GameRegistry.addShapedRecipe(new ItemStack(blockLEDLamp), new Object[]{
+				"SGS",
+				"GSG",
+				"SGS",
+				'S', Block.stone,
+				'G', Item.glowstone
+			});
 		
 		//SMELTING RECIPES
 		
