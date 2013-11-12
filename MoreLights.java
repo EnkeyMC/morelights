@@ -1,7 +1,9 @@
 package morelights;
 
 import morelights.block.BlockLamp;
+import morelights.block.OverlayBlock;
 import morelights.lib.Reference;
+import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -35,6 +37,8 @@ public class MoreLights {
 	public static Block blockLEDLamp;
 	public int blockLEDLampID;
 	
+	public static Block blockOverlayTest;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -59,6 +63,10 @@ public class MoreLights {
 			.setResistance(1.5F)
 			.setStepSound(Block.soundStoneFootstep);
 		
+		blockOverlayTest = new OverlayBlock(701, Material.ground)
+			.setUnlocalizedName("OverlayBlock")
+			.setCreativeTab(CreativeTabs.tabBlock);
+		
 		//CREATING ITEMS
 		
 		//SHAPELESS CRAFTING RECIPES
@@ -79,17 +87,20 @@ public class MoreLights {
 		
 			//BLOCKS
 				GameRegistry.registerBlock(blockLEDLamp);
+				GameRegistry.registerBlock(blockOverlayTest);
 				
 			//TILE ENTITIES
 				
 		//LANGUAGE REGISTRY
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
+			LanguageRegistry.addName(blockOverlayTest, "Test");
 			
 	}
 	
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent event){
 		proxy.registerRenderers();
+		ClientProxy.setCustomRenderers();
 	}
 
 }
