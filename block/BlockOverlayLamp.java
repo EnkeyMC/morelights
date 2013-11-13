@@ -9,9 +9,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
 
-public class OverlayBlock extends Block{
+public class BlockOverlayLamp extends Block{
 
-	public OverlayBlock(int id, Material par2Material) {
+	public BlockOverlayLamp(int id, Material par2Material) {
 		super(id, par2Material);
 		this.setLightValue(1.0F);
 	}

@@ -1,7 +1,7 @@
 package morelights;
 
 import morelights.block.BlockLamp;
-import morelights.block.OverlayBlock;
+import morelights.block.BlockOverlayLamp;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
@@ -37,7 +37,8 @@ public class MoreLights {
 	public static Block blockLEDLamp;
 	public int blockLEDLampID;
 	
-	public static Block blockOverlayTest;
+	public static Block blockLEDBase;
+	public int blockLEDBaseID;
 	
 	//ITEMS
 	
@@ -48,6 +49,7 @@ public class MoreLights {
 		config.load();
 		
 		blockLEDLampID = config.getBlock("blockLEDLamp", 700).getInt();
+		blockLEDBaseID = config.getBlock("blockLEDbase", 701).getInt();
 		
 		config.save();
 	}
@@ -56,16 +58,15 @@ public class MoreLights {
 	public void load(FMLInitializationEvent event){
 		
 		//CREATING BLOCKS
-		blockLEDLamp = new BlockLamp(blockLEDLampID, Material.ground)
+		blockLEDLamp = new BlockOverlayLamp(blockLEDLampID, Material.ground)
 			.setUnlocalizedName("LEDLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
 			.setHardness(1.0F)
 			.setResistance(1.5F)
 			.setStepSound(Block.soundStoneFootstep);
 		
-		blockOverlayTest = new OverlayBlock(701, Material.ground)
-			.setUnlocalizedName("OverlayBlock")
-			.setCreativeTab(CreativeTabs.tabBlock);
+		blockLEDBase = new BlockLamp(blockLEDBaseID, Material.ground)
+			.setUnlocalizedName("LEDBase");
 		
 		//CREATING ITEMS
 		
@@ -87,13 +88,11 @@ public class MoreLights {
 		
 			//BLOCKS
 				GameRegistry.registerBlock(blockLEDLamp);
-				GameRegistry.registerBlock(blockOverlayTest);
 				
 			//TILE ENTITIES
 				
 		//LANGUAGE REGISTRY
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
-			LanguageRegistry.addName(blockOverlayTest, "Test");
 			
 	}
 	
