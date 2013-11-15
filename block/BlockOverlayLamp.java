@@ -14,6 +14,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockOverlayLamp extends BlockContainer{
+	
+	public static Icon OverIcon;
 
 	public BlockOverlayLamp(int id, Material par2Material) {
 		super(id, par2Material);
@@ -48,6 +50,7 @@ public class BlockOverlayLamp extends BlockContainer{
 	
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1){
+		this.OverIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5) + "_over");
 		this.blockIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5));
 	}
 

@@ -19,6 +19,7 @@ public class LampRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
+		renderer.renderBlockAsItem(block, 1, 0.0F);
 	}
 
 	@Override
@@ -155,7 +156,9 @@ public class LampRenderer implements ISimpleBlockRenderingHandler {
         }
         else                   
         {
+        	renderer.setOverrideBlockTexture(BlockOverlayLamp.OverIcon);
         	renderer.renderStandardBlock(MoreLights.blockLEDLamp,x,y,z); 
+        	renderer.clearOverrideBlockTexture();
         }
        
         return true;
