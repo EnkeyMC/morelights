@@ -2,6 +2,7 @@ package morelights.renderers;
 
 import morelights.MoreLights;
 import morelights.block.BlockLamp;
+import morelights.block.BlockOverlayLamp;
 import morelights.proxy.ClientProxy;
 import morelights.tileentity.TileOverlayLamp;
 import net.minecraft.block.Block;
@@ -119,18 +120,12 @@ public class LampRenderer implements ISimpleBlockRenderingHandler {
 					meta = world.getBlockMetadata(x, y + 1, z);
 				break;
 			}
-			//TODO do by ternal operator
-			if(blockBase != null){
-				if(!(blockBase instanceof BlockContainer)){
-					if(blockBase.renderAsNormalBlock()){
-						if(blockBase.isOpaqueCube()){
-							if(blockID != 2){
-								check = 10;
-							}
-						}
-					}
-				}
+			
+			if(blockBase == null ? false : (!blockBase.renderAsNormalBlock() ? false : (!blockBase.isOpaqueCube() ? false : (blockID == 2 ? false : true))))
+			{
+				check = 10;
 			}
+			
 			check++;
 		
 		}while(check <= 6);
