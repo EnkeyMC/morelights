@@ -4,17 +4,26 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
+import morelights.tileentity.TileOverlayLamp;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
-public class BlockOverlayLamp extends Block{
+public class BlockOverlayLamp extends BlockContainer{
 
 	public BlockOverlayLamp(int id, Material par2Material) {
 		super(id, par2Material);
 		this.setLightValue(1.0F);
 	}
+	
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileOverlayLamp();
+	}	
 	
 	@Override
     public int getRenderType()
@@ -41,4 +50,6 @@ public class BlockOverlayLamp extends Block{
 	public void registerIcons(IconRegister par1){
 		this.blockIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5));
 	}
+
+	
 }

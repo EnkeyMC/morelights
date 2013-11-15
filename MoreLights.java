@@ -5,6 +5,7 @@ import morelights.block.BlockOverlayLamp;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
+import morelights.tileentity.TileOverlayLamp;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -48,8 +49,11 @@ public class MoreLights {
 		
 		config.load();
 		
+		//BLOCK IDs
 		blockLEDLampID = config.getBlock("blockLEDLamp", 700).getInt();
 		blockLEDBaseID = config.getBlock("blockLEDbase", 701).getInt();
+		
+		//ITEM IDs
 		
 		config.save();
 	}
@@ -90,6 +94,7 @@ public class MoreLights {
 				GameRegistry.registerBlock(blockLEDLamp);
 				
 			//TILE ENTITIES
+				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
 				
 		//LANGUAGE REGISTRY
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
