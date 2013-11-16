@@ -1,7 +1,11 @@
 package morelights.proxy;
 
 import morelights.renderers.LampRenderer;
+import morelights.renderers.ModelOldWallLampRenderer;
+import morelights.tileentity.TileBlockOldWallLamp;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ClientProxy extends CommonProxy {
 	
@@ -15,6 +19,6 @@ public class ClientProxy extends CommonProxy {
 	}
 	
 	public void registerRenderers() {
-			
+			ClientRegistry.bindTileEntitySpecialRenderer(TileBlockOldWallLamp.class, new ModelOldWallLampRenderer());
 	}
 }

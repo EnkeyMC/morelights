@@ -1,10 +1,12 @@
 package morelights;
 
 import morelights.block.BlockLamp;
+import morelights.block.BlockOldWallLamp;
 import morelights.block.BlockOverlayLamp;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
+import morelights.tileentity.TileBlockOldWallLamp;
 import morelights.tileentity.TileOverlayLamp;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -41,6 +43,9 @@ public class MoreLights {
 	public static Block blockLEDBase;
 	public int blockLEDBaseID;
 	
+	public static Block blockOldWallLamp;
+	public int blockOldWallLampID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -52,6 +57,7 @@ public class MoreLights {
 		//BLOCK IDs
 		blockLEDLampID = config.getBlock("blockLEDLamp", 700).getInt();
 		blockLEDBaseID = config.getBlock("blockLEDbase", 701).getInt();
+		blockOldWallLampID = config.getBlock("blockOldeWallLamp", 702).getInt();
 		
 		//ITEM IDs
 		
@@ -71,6 +77,13 @@ public class MoreLights {
 		
 		blockLEDBase = new BlockLamp(blockLEDBaseID, Material.ground)
 			.setUnlocalizedName("LEDBase");
+		
+		blockOldWallLamp = new BlockOldWallLamp(blockOldWallLampID, Material.glass)
+			.setUnlocalizedName("OldWallLamp")
+			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(0.8F)
+			.setResistance(1.5F)
+			.setStepSound(Block.soundMetalFootstep);
 		
 		//CREATING ITEMS
 		
@@ -92,12 +105,15 @@ public class MoreLights {
 		
 			//BLOCKS
 				GameRegistry.registerBlock(blockLEDLamp);
+				GameRegistry.registerBlock(blockOldWallLamp);
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
+				GameRegistry.registerTileEntity(TileBlockOldWallLamp.class, "OldWallLamp");
 				
 		//LANGUAGE REGISTRY
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
+			LanguageRegistry.addName(blockOldWallLamp, "Old Wall Lamp");
 			
 	}
 	
