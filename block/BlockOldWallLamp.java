@@ -1,11 +1,26 @@
 package morelights.block;
 
+import static net.minecraftforge.common.ForgeDirection.EAST;
+import static net.minecraftforge.common.ForgeDirection.NORTH;
+import static net.minecraftforge.common.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.ForgeDirection.WEST;
+
+import java.util.List;
+import java.util.Random;
+
 import morelights.proxy.ClientProxy;
 import morelights.tileentity.TileBlockOldWallLamp;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockOldWallLamp extends BlockContainer{
 
@@ -34,18 +49,123 @@ public class BlockOldWallLamp extends BlockContainer{
 		return false;
 	}
 	
-	@Override
-    public int getRenderBlockPass()
-	{
-        return 1;
+	public void onBlockAdded(World par1World, int par2, int par3, int par4)
+    {
+        super.onBlockAdded(par1World, par2, par3, par4);
+        this.setDefaultDirection(par1World, par2, par3, par4);
+    }
+	
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+		if(!this.canPlaceBlockAt(par1World, par2, par3, par4)){
+			this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
+			par1World.setBlockToAir(par2, par3, par4);
+		}
 	}
 	
-	@Override
-    public boolean canRenderInPass(int pass)
-	{
-	    //Set the static var in the client proxy
-	    ClientProxy.renderPass = pass;
-	    //the block can render in both passes, so return true always
-	    return true;
-	}
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST ) ||
+               par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST ) ||
+               par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH) ||
+               par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH);
+    }
+	
+	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
+    {
+        return this.canPlaceBlockAt(par1World, par2, par3, par4);
+    }
+	
+	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+    {
+        ForgeDirection dir = ForgeDirection.getOrientation(par5);
+        return (dir == NORTH && par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH)) ||
+               (dir == SOUTH && par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH)) ||
+               (dir == WEST  && par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST )) ||
+               (dir == EAST  && par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST ));
+    }
+	
+	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9)
+    {
+        if (par5 == 3)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
+        }
+
+        if (par5 == 5)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
+        }
+
+        if (par5 == 4)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
+        }
+
+        if (par5 == 2)
+        {
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+        }
+        return par1World.getBlockMetadata(par2, par3, par4);
+    }
+	
+	private void setDefaultDirection(World par1World, int par2, int par3, int par4)
+    {
+        if (!par1World.isRemote)
+        {
+            byte b0 = 3;
+
+            if (par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH))
+            {
+                b0 = 3;
+            }
+
+            if (par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH))
+            {
+                b0 = 2;
+            }
+
+            if (par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST ))
+            {
+                b0 = 5;
+            }
+
+            if (par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST ))
+            {
+                b0 = 4;
+            }
+
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+        }
+    }
+	
+	 public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	    {
+	        {
+	            int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+
+	            switch (meta)
+	            {
+	                case 2:
+	                	this.setBlockBounds(0.3125F, 0.0625F, 0.3125F, 0.6875F, 0.9375F, 1F);
+	                	break;
+	                case 3:
+	                	this.setBlockBounds(0.3125F, 0.0625F, 0.0F, 0.6875F, 0.9375F, 0.6875F);
+	                    break;
+	                case 4:
+	                	this.setBlockBounds(0F, 0.0625F, 0.3125F, 0.6875F, 0.9375F, 0.6875F);
+	                	break;
+	                case 5:
+	                	this.setBlockBounds(0.3125F, 0.0625F, 0.3125F, 1F, 0.9375F, 0.6875F);
+	                	break;
+	                default:
+	                	System.out.println("Bad metadata!" + meta);
+	            }
+	        }
+	    }
+	 
+	 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+	    {
+	        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+	        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+	    }
 }
