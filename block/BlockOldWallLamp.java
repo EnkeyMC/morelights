@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 import morelights.proxy.ClientProxy;
+import morelights.renderers.ModelOldWallLampRenderer;
 import morelights.tileentity.TileBlockOldWallLamp;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class BlockOldWallLamp extends BlockContainer{
+	
 
 	public BlockOldWallLamp(int par1, Material par2Material) {
 		super(par1, par2Material);
@@ -36,7 +38,7 @@ public class BlockOldWallLamp extends BlockContainer{
 	
 	@Override
 	public int getRenderType(){
-		return -1;
+		return ModelOldWallLampRenderer.renderID;
 	}
 	
 	@Override

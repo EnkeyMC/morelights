@@ -1,11 +1,13 @@
 package morelights;
 
 import morelights.block.BlockLamp;
+import morelights.block.BlockOldStreetLamp;
 import morelights.block.BlockOldWallLamp;
 import morelights.block.BlockOverlayLamp;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
+import morelights.tileentity.TileBlockOldStreetLamp;
 import morelights.tileentity.TileBlockOldWallLamp;
 import morelights.tileentity.TileOverlayLamp;
 import net.minecraft.block.Block;
@@ -46,6 +48,9 @@ public class MoreLights {
 	public static Block blockOldWallLamp;
 	public int blockOldWallLampID;
 	
+	public static Block blockOldStreetLamp;
+	public int blockOldStreetLampID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -58,6 +63,7 @@ public class MoreLights {
 		blockLEDLampID = config.getBlock("blockLEDLamp", 700).getInt();
 		blockLEDBaseID = config.getBlock("blockLEDbase", 701).getInt();
 		blockOldWallLampID = config.getBlock("blockOldeWallLamp", 702).getInt();
+		blockOldStreetLampID = config.getBlock("blockOldStreetLamp", 703).getInt();
 		
 		//ITEM IDs
 		
@@ -85,6 +91,13 @@ public class MoreLights {
 			.setResistance(1.5F)
 			.setStepSound(Block.soundMetalFootstep);
 		
+		blockOldStreetLamp = new BlockOldStreetLamp(blockOldStreetLampID, Material.glass)
+			.setUnlocalizedName("OldStreetLamp")
+			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(1F)
+			.setResistance(1.8F)
+			.setStepSound(Block.soundMetalFootstep);
+		
 		//CREATING ITEMS
 		
 		//SHAPELESS CRAFTING RECIPES
@@ -98,6 +111,15 @@ public class MoreLights {
 				'S', Block.stone,
 				'G', Item.glowstone
 			});
+			
+			GameRegistry.addShapedRecipe(new ItemStack(blockOldWallLamp), new Object[]{
+				" S ",
+				"PTP",
+				" S ",
+				'S', Block.stone,
+				'T', Block.torchWood,
+				'P', Block.thinGlass
+			});
 		
 		//SMELTING RECIPES
 		
@@ -106,14 +128,17 @@ public class MoreLights {
 			//BLOCKS
 				GameRegistry.registerBlock(blockLEDLamp);
 				GameRegistry.registerBlock(blockOldWallLamp);
+				GameRegistry.registerBlock(blockOldStreetLamp);
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
 				GameRegistry.registerTileEntity(TileBlockOldWallLamp.class, "OldWallLamp");
+				GameRegistry.registerTileEntity(TileBlockOldStreetLamp.class, "OldStreetLamp");
 				
 		//LANGUAGE REGISTRY
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
 			LanguageRegistry.addName(blockOldWallLamp, "Old Wall Lamp");
+			LanguageRegistry.addName(blockOldStreetLamp, "Old Street Lamp");
 			
 	}
 	
