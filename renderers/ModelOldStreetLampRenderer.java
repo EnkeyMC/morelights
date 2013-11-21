@@ -58,8 +58,9 @@ public class ModelOldStreetLampRenderer extends TileEntitySpecialRenderer implem
         
         GL11.glTranslatef(0F, -2.96F, 0F);
 
-        GL11.glEnable(GL11.GL_BLEND);
+        
         this.modelLamp.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GL11.glEnable(GL11.GL_BLEND);
         this.modelFire.render((Entity)null,  0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.015625F);
         this.modelGlass.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         
@@ -82,7 +83,34 @@ public class ModelOldStreetLampRenderer extends TileEntitySpecialRenderer implem
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
+		
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0F,1F,0F);
+        GL11.glDisable(GL11.GL_CULL_FACE);
+        
+        ResourceLocation textures = (new ResourceLocation(Reference.modid + ":textures/models/ModelOldStreetLamp.png")); 
+        Minecraft.getMinecraft().renderEngine.bindTexture(textures);
+        
+        GL11.glPushMatrix();
+        GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        
+        this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        
+        ResourceLocation textures2 = (new ResourceLocation(Reference.modid + ":textures/models/ModelOldWallLamp.png")); 
+        Minecraft.getMinecraft().renderEngine.bindTexture(textures2);
+        
+        GL11.glTranslatef(0F, -2.96F, 0F);
 
+        
+        this.modelLamp.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GL11.glEnable(GL11.GL_BLEND);
+        this.modelFire.render((Entity)null,  0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.015625F);
+        this.modelGlass.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glPopMatrix();
+        GL11.glPopMatrix();
 		
 	}
 

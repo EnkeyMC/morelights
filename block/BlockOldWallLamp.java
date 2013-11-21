@@ -8,11 +8,15 @@ import static net.minecraftforge.common.ForgeDirection.WEST;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.renderers.ModelOldWallLampRenderer;
 import morelights.tileentity.TileBlockOldWallLamp;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -170,4 +174,9 @@ public class BlockOldWallLamp extends BlockContainer{
 	        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
 	        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 	    }
+	 	
+	 	@SideOnly(Side.CLIENT)
+		public void registerIcons(IconRegister par1){
+			this.blockIcon = par1.registerIcon(Reference.modid + ":OldLamp");
+		}
 }

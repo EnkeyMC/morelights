@@ -4,6 +4,8 @@ import morelights.block.BlockLamp;
 import morelights.block.BlockOldStreetLamp;
 import morelights.block.BlockOldWallLamp;
 import morelights.block.BlockOverlayLamp;
+import morelights.block.BlockStreetLampLight;
+import morelights.block.BlockStreetLampPart;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
@@ -51,6 +53,12 @@ public class MoreLights {
 	public static Block blockOldStreetLamp;
 	public int blockOldStreetLampID;
 	
+	public static Block blockStreetLampPart;
+	public int blockStreetLampPartID;
+	
+	public static Block blockStreetLampLight;
+	public int blockStreetLampLightID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -64,6 +72,8 @@ public class MoreLights {
 		blockLEDBaseID = config.getBlock("blockLEDbase", 701).getInt();
 		blockOldWallLampID = config.getBlock("blockOldeWallLamp", 702).getInt();
 		blockOldStreetLampID = config.getBlock("blockOldStreetLamp", 703).getInt();
+		blockStreetLampPartID = config.getBlock("blockStreetLampPartID", 704).getInt();
+		blockStreetLampLightID = config.getBlock("blockStreetLampLight", 705).getInt();
 		
 		//ITEM IDs
 		
@@ -74,14 +84,14 @@ public class MoreLights {
 	public void load(FMLInitializationEvent event){
 		
 		//CREATING BLOCKS
-		blockLEDLamp = new BlockOverlayLamp(blockLEDLampID, Material.ground)
+		blockLEDLamp = new BlockOverlayLamp(blockLEDLampID, Material.portal)
 			.setUnlocalizedName("LEDLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
 			.setHardness(1.0F)
 			.setResistance(1.5F)
 			.setStepSound(Block.soundStoneFootstep);
 		
-		blockLEDBase = new BlockLamp(blockLEDBaseID, Material.ground)
+		blockLEDBase = new BlockLamp(blockLEDBaseID, Material.portal)
 			.setUnlocalizedName("LEDBase");
 		
 		blockOldWallLamp = new BlockOldWallLamp(blockOldWallLampID, Material.glass)
@@ -91,9 +101,21 @@ public class MoreLights {
 			.setResistance(1.5F)
 			.setStepSound(Block.soundMetalFootstep);
 		
-		blockOldStreetLamp = new BlockOldStreetLamp(blockOldStreetLampID, Material.glass)
+		blockOldStreetLamp = new BlockOldStreetLamp(blockOldStreetLampID, Material.portal)
 			.setUnlocalizedName("OldStreetLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(1F)
+			.setResistance(1.8F)
+			.setStepSound(Block.soundMetalFootstep);
+		
+		blockStreetLampPart = new BlockStreetLampPart(blockStreetLampPartID, Material.portal)
+			.setUnlocalizedName("StreetLampPart")
+			.setHardness(1F)
+			.setResistance(1.8F)
+			.setStepSound(Block.soundMetalFootstep);
+		
+		blockStreetLampLight = new BlockStreetLampLight(blockStreetLampLightID, Material.portal)
+			.setUnlocalizedName("StreetLampLight")
 			.setHardness(1F)
 			.setResistance(1.8F)
 			.setStepSound(Block.soundMetalFootstep);
