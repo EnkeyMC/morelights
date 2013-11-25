@@ -147,7 +147,7 @@ public class BlockOldWallLamp extends BlockContainer{
 	 public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	    {
 	        {
-	            int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+	            byte meta = (byte)par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
 	            switch (meta)
 	            {
@@ -164,7 +164,7 @@ public class BlockOldWallLamp extends BlockContainer{
 	                	this.setBlockBounds(0.3125F, 0.0625F, 0.3125F, 1F, 0.9375F, 0.6875F);
 	                	break;
 	                default:
-	                	System.out.println("Bad metadata!" + meta);
+	                	System.out.println("Bad metadata of BlockOldWallLamp!" + meta);
 	            }
 	        }
 	    }

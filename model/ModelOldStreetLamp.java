@@ -37,19 +37,19 @@ public class ModelOldStreetLamp extends ModelBase{
     textureHeight = 64;
     
       Shape1 = new ModelRenderer(this, 4, 27);
-      Shape1.addBox(-3F, 10F, -2F, 6, 14, 4);
+      Shape1.addBox(-3F, 10F, -2F, 6, 13, 4);
       Shape1.setRotationPoint(0F, 0F, 0F);
       Shape1.setTextureSize(32, 64);
       Shape1.mirror = true;
       setRotation(Shape1, 0F, 0F, 0F);
       Shape2 = new ModelRenderer(this, 3, 3);
-      Shape2.addBox(-2F, 10F, 2F, 4, 14, 1);
+      Shape2.addBox(-2F, 10F, 2F, 4, 13, 1);
       Shape2.setRotationPoint(0F, 0F, 0F);
       Shape2.setTextureSize(32, 64);
       Shape2.mirror = true;
       setRotation(Shape2, 0F, 0F, 0F);
       Shape3 = new ModelRenderer(this, 3, 3);
-      Shape3.addBox(-2F, 10F, -3F, 4, 14, 1);
+      Shape3.addBox(-2F, 10F, -3F, 4, 13, 1);
       Shape3.setRotationPoint(0F, 0F, 0F);
       Shape3.setTextureSize(32, 64);
       Shape3.mirror = true;

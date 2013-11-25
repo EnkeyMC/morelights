@@ -125,7 +125,8 @@ public class MoreLights {
 		//SHAPELESS CRAFTING RECIPES
 		
 		//SHAPED CRAFTING RECIPES
-		
+			
+			//LED Lamp
 			GameRegistry.addShapedRecipe(new ItemStack(blockLEDLamp), new Object[]{
 				"SGS",
 				"GSG",
@@ -134,6 +135,7 @@ public class MoreLights {
 				'G', Item.glowstone
 			});
 			
+			//Old Wall Lamp
 			GameRegistry.addShapedRecipe(new ItemStack(blockOldWallLamp), new Object[]{
 				" S ",
 				"PTP",
@@ -141,6 +143,15 @@ public class MoreLights {
 				'S', Block.stone,
 				'T', Block.torchWood,
 				'P', Block.thinGlass
+			});
+			
+			//Old Street Lamp
+			GameRegistry.addShapedRecipe(new ItemStack(blockOldStreetLamp), new Object[]{
+				" L ",
+				" S ",
+				" S ",
+				'L', blockOldWallLamp,
+				'S', Block.stone
 			});
 		
 		//SMELTING RECIPES

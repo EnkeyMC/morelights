@@ -78,8 +78,10 @@ public class ModelOldWallLampRenderer extends TileEntitySpecialRenderer implemen
         }
         
         this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_BLEND);       
+        GL11.glScalef(0.7F, 1F, 0.7F);
         this.modelFire.render((Entity)null,  0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.015625F);
+        GL11.glScalef(1F/0.7F, 1F, 1F/0.7F);
         this.modelGlass.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
         GL11.glDisable(GL11.GL_BLEND);
@@ -116,7 +118,6 @@ public class ModelOldWallLampRenderer extends TileEntitySpecialRenderer implemen
 		
 		
 		this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        this.modelFire.render((Entity)null,  0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.015625F);
         GL11.glEnable(GL11.GL_BLEND);
         this.modelGlass.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
        

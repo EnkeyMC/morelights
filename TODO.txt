@@ -1,0 +1,7 @@
+- redstone controlling
+- tweak old street lamp
+- old wall lamp on floor and ceiling
+- ceiling connecting light
+- wall led lamp (ISBRH)
+- modern lamps
+- old lamps

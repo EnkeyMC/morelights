@@ -39,12 +39,15 @@ public class BlockStreetLampLight extends Block{
 	
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
 	{
-		par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+		Block block = Block.blocksList[par1World.getBlockId(par2, par3 - 3, par4)];
+		if(block instanceof BlockOldStreetLamp){
+			((BlockOldStreetLamp) block).notifyBase(par1World, par2, par3 - 3, par4);
+		}
 	}
 	
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
 	{
-		par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
+		this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 0);
 	}
 
 	@Override

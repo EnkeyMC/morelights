@@ -21,104 +21,47 @@ public class LampRenderer implements ISimpleBlockRenderingHandler {
 			RenderBlocks renderer) {
 		renderer.renderBlockAsItem(block, 1, 0.0F);
 	}
-
+	
+	private short meta;
+	private short blockID;
+	private Icon icon = null;
+	
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
 		
-		int blockID = 0;
-		int meta = 0;
 		Block blockBase = null;
-		int check = 1;
-		Icon icon = null;
+		short baseID = 0;
+		byte check = 1;
+		short ID = 0;
+		
 		TileOverlayLamp tile = (TileOverlayLamp) world.getBlockTileEntity(x, y, z);
-		TileOverlayLamp tileBase = null;
 		
 		do{
 			switch(check){
 			case 1:
-				blockID = world.getBlockId(x, y -1, z);
-				blockBase = Block.blocksList[blockID];
-				if(world.getBlockId(x, y, z) == blockID)
-					tileBase = (TileOverlayLamp) world.getBlockTileEntity(x, y - 1, z);
-					if(tileBase != null)
-					{
-						icon = tileBase.getBaseIcon();
-						if(icon == null)
-							blockBase = null;
-					}
-				if(blockID != 2)
-					meta = world.getBlockMetadata(x, y - 1, z);
+				ID = (short)world.getBlockId(x, y, z);
+				blockBase = this.checkForBlocks(world, x, y - 1, z, ID);
 				break;
 			case 2:
-				blockID = world.getBlockId(x + 1, y, z);
-				blockBase = Block.blocksList[blockID];
-				if(world.getBlockId(x, y, z) == blockID)
-					tileBase = (TileOverlayLamp) world.getBlockTileEntity(x + 1, y, z);
-					if(tileBase != null)
-					{
-						icon = tileBase.getBaseIcon();
-						if(icon == null)
-							blockBase = null;
-					}
-				if(blockID != 2)
-					meta = world.getBlockMetadata(x + 1, y, z);
+				ID = (short)world.getBlockId(x, y, z);
+				blockBase = this.checkForBlocks(world, x + 1, y, z, ID);
 				break;
 			case 3:
-				blockID = world.getBlockId(x - 1, y, z);
-				blockBase = Block.blocksList[blockID];
-				if(world.getBlockId(x, y, z) == blockID)
-					tileBase = (TileOverlayLamp) world.getBlockTileEntity(x - 1, y, z);
-					if(tileBase != null)
-					{
-						icon = tileBase.getBaseIcon();
-						if(icon == null)
-							blockBase = null;
-					}
-				if(blockID != 2)
-					meta = world.getBlockMetadata(x - 1, y, z);
+				ID = (short)world.getBlockId(x, y, z);
+				blockBase = this.checkForBlocks(world, x - 1, y - 1, z, ID);
 				break;
 			case 4:
-				blockID = world.getBlockId(x, y, z + 1);
-				blockBase = Block.blocksList[blockID];
-				if(world.getBlockId(x, y, z) == blockID)
-					tileBase = (TileOverlayLamp) world.getBlockTileEntity(x, y, z + 1);
-					if(tileBase != null)
-					{	
-						icon = tileBase.getBaseIcon();
-						if(icon == null)
-							blockBase = null;
-					}
-				if(blockID != 2)
-					meta = world.getBlockMetadata(x, y, z + 1);
+				ID = (short)world.getBlockId(x, y, z);
+				blockBase = this.checkForBlocks(world, x, y, z + 1, ID);
 				break;
 			case 5:
-				blockID = world.getBlockId(x, y, z - 1);
-				blockBase = Block.blocksList[blockID];
-				if(world.getBlockId(x, y, z) == blockID)
-					tileBase = (TileOverlayLamp) world.getBlockTileEntity(x, y, z - 1);
-					if(tileBase != null)
-					{	
-						icon = tileBase.getBaseIcon();
-						if(icon == null)
-							blockBase = null;
-					}
-				if(blockID != 2)
-					meta = world.getBlockMetadata(x, y, z - 1);
+				ID = (short)world.getBlockId(x, y, z);
+				blockBase = this.checkForBlocks(world, x, y, z - 1, ID);
 				break;
 			case 6:
-				blockID = world.getBlockId(x, y + 1, z);
-				blockBase = Block.blocksList[blockID];
-				if(world.getBlockId(x, y, z) == blockID)
-					tileBase = (TileOverlayLamp) world.getBlockTileEntity(x, y + 1, z);
-					if(tileBase != null)
-					{	
-						icon = tileBase.getBaseIcon();
-						if(icon == null)
-							blockBase = null;
-					}
-				if(blockID != 2)
-					meta = world.getBlockMetadata(x, y + 1, z);
+				ID = (short)world.getBlockId(x, y, z);
+				blockBase = this.checkForBlocks(world, x, y + 1, z, ID);
 				break;
 			}
 			
@@ -162,6 +105,24 @@ public class LampRenderer implements ISimpleBlockRenderingHandler {
         }
        
         return true;
+	}
+	
+	private Block checkForBlocks(IBlockAccess world, int x, int y, int z, short ID)
+	{
+		this.blockID = (short) world.getBlockId(x, y, z);
+		TileOverlayLamp tileBase = null;
+		Block blockBase = Block.blocksList[blockID];
+		if(ID == blockID)
+			tileBase = (TileOverlayLamp) world.getBlockTileEntity(x, y, z);
+			if(tileBase != null)
+			{	
+				this.icon = tileBase.getBaseIcon();
+				if(this.icon == null)
+					blockBase = null;
+			}
+		if(this.blockID != 2)
+			this.meta = (short) world.getBlockMetadata(x, y, z);
+		return blockBase;
 	}
 
 	@Override
