@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.tileentity.TileOverlayLamp;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -48,9 +47,10 @@ public class BlockOverlayLamp extends BlockContainer{
         return 1;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1){
-		this.OverIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5) + "_over");
+		BlockOverlayLamp.OverIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5) + "_over");
 		this.blockIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5));
 	}
 

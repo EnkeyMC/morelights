@@ -36,6 +36,7 @@ public class BlockStreetLampPart extends Block{
 		return false;
 	}
 	
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	{
 		byte meta = (byte)par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -51,6 +52,7 @@ public class BlockStreetLampPart extends Block{
 		}
 	}
 	
+	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
 	{
 		Block block = Block.blocksList[par1World.getBlockId(par2, par3 - par5, par4)];
@@ -59,11 +61,13 @@ public class BlockStreetLampPart extends Block{
 		}
 	}
 
+	@Override
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
 	{
 		this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 0);
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
 	{
@@ -79,6 +83,7 @@ public class BlockStreetLampPart extends Block{
 		return MoreLights.blockOldStreetLamp.blockID;
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1){
 		this.blockIcon = par1.registerIcon(Reference.modid + ":TransparentTexture");

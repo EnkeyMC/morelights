@@ -6,23 +6,17 @@ import static net.minecraftforge.common.ForgeDirection.SOUTH;
 import static net.minecraftforge.common.ForgeDirection.WEST;
 
 import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import morelights.lib.Reference;
-import morelights.proxy.ClientProxy;
 import morelights.renderers.ModelOldWallLampRenderer;
 import morelights.tileentity.TileBlockOldWallLamp;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -55,12 +49,14 @@ public class BlockOldWallLamp extends BlockContainer{
 		return false;
 	}
 	
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.setDefaultDirection(par1World, par2, par3, par4);
     }
 	
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		if(!this.canPlaceBlockAt(par1World, par2, par3, par4)){
 			this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
@@ -68,6 +64,7 @@ public class BlockOldWallLamp extends BlockContainer{
 		}
 	}
 	
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
         return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST ) ||
@@ -76,11 +73,13 @@ public class BlockOldWallLamp extends BlockContainer{
                par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH);
     }
 	
+	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
     {
         return this.canPlaceBlockAt(par1World, par2, par3, par4);
     }
 	
+	@Override
 	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
     {
         ForgeDirection dir = ForgeDirection.getOrientation(par5);
@@ -90,6 +89,7 @@ public class BlockOldWallLamp extends BlockContainer{
                (dir == EAST  && par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST ));
     }
 	
+	@Override
 	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9)
     {
         if (par5 == 3)
@@ -144,7 +144,8 @@ public class BlockOldWallLamp extends BlockContainer{
         }
     }
 	
-	 public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
+	 @Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
 	    {
 	        {
 	            byte meta = (byte)par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -169,13 +170,15 @@ public class BlockOldWallLamp extends BlockContainer{
 	        }
 	    }
 	 
-	 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
+	 	@Override
+		public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
 	    {
 	        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
 	        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 	    }
 	 	
-	 	@SideOnly(Side.CLIENT)
+	 	@Override
+		@SideOnly(Side.CLIENT)
 		public void registerIcons(IconRegister par1){
 			this.blockIcon = par1.registerIcon(Reference.modid + ":OldLamp");
 		}

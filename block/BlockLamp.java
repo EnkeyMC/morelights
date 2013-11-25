@@ -6,7 +6,6 @@ import morelights.lib.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
 
 public class BlockLamp extends Block{
 
@@ -15,6 +14,7 @@ public class BlockLamp extends Block{
 		this.setLightValue(1.0F);
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1){
 		this.blockIcon = par1.registerIcon(Reference.modid + ":" + this.getUnlocalizedName().substring(5));

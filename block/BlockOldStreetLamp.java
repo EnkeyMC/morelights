@@ -45,6 +45,7 @@ public class BlockOldStreetLamp extends BlockContainer {
 		return false;
 	}
 	
+	@Override
 	public void onBlockAdded(World world, int x, int y, int z)
 	{
 		world.setBlock(x, y + 1, z, MoreLights.blockStreetLampPart.blockID, 1, 2);
@@ -60,6 +61,7 @@ public class BlockOldStreetLamp extends BlockContainer {
 		}
 	}
 	//TODO drop as item in some cases
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		if(!this.canBlockStay(par1World, par2, par3, par4)){
 			this.deleteLamp(par1World, par2, par3, par4);
@@ -81,6 +83,7 @@ public class BlockOldStreetLamp extends BlockContainer {
 		return false;
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {		
         return (par1World.isBlockSolidOnSide(par2, par3 - 1, par4, UP))&&
@@ -89,6 +92,7 @@ public class BlockOldStreetLamp extends BlockContainer {
         		(par1World.getBlockId(par2, par3 + 3, par4) == 0);
     }
 	
+	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
 		return (world.isBlockSolidOnSide(x, y - 1, z, UP))&&
@@ -97,11 +101,13 @@ public class BlockOldStreetLamp extends BlockContainer {
 				(world.getBlockId(x, y + 3, z) == MoreLights.blockStreetLampLight.blockID);
 	}
 	
+	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5)
 	{
 		this.deleteLamp(par1World, par2, par3, par4);
 	}
 	
+	@Override
 	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion)
 	{
 		this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 0);
@@ -115,6 +121,7 @@ public class BlockOldStreetLamp extends BlockContainer {
 		par1World.setBlockToAir(par2, par3 + 3, par4);
 	}
 	
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1){
 		this.blockIcon = par1.registerIcon(Reference.modid + ":OldLamp");
