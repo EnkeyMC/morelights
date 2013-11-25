@@ -5,3 +5,6 @@
 - wall led lamp (ISBRH)
 - modern lamps
 - old lamps
+- reflector
+- repair bugs (Old wall lamp)
+- droping item of Old street lamp
