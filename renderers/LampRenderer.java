@@ -1,15 +1,11 @@
 package morelights.renderers;
 
 import morelights.MoreLights;
-import morelights.block.BlockLamp;
 import morelights.block.BlockOverlayLamp;
 import morelights.proxy.ClientProxy;
 import morelights.tileentity.TileOverlayLamp;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;

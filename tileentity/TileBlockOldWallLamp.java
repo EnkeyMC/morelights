@@ -7,6 +7,7 @@ import net.minecraft.util.AxisAlignedBB;
 
 public class TileBlockOldWallLamp extends TileEntity {
 	
+	@Override
 	@SideOnly(Side.CLIENT)
     public AxisAlignedBB getRenderBoundingBox()
 	{

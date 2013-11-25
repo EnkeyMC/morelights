@@ -1,6 +1,5 @@
 package morelights.tileentity;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 

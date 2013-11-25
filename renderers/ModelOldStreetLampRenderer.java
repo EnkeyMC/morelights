@@ -30,7 +30,7 @@ public class ModelOldStreetLampRenderer extends TileEntitySpecialRenderer implem
 	private final ModelOldWallLampGlass modelGlass;
 	
 	public ModelOldStreetLampRenderer(int ID) {
-		this.renderID = ID;
+		ModelOldStreetLampRenderer.renderID = ID;
 		this.model = new ModelOldStreetLamp();
 		this.modelLamp = new ModelOldStreetLampLamp();
 		this.modelFire = new ModelOldWallLampFire();
@@ -79,7 +79,7 @@ public class ModelOldStreetLampRenderer extends TileEntitySpecialRenderer implem
         int modulousModifier = skyLight % 65536;
         int divModifier = skyLight / 65536;
         tess.setColorOpaque_F(brightness, brightness, brightness);
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,  (float) modulousModifier,  divModifier);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,  modulousModifier,  divModifier);
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class ModelOldStreetLampRenderer extends TileEntitySpecialRenderer implem
 	@Override
 	public int getRenderId() {
 
-		return this.renderID;
+		return ModelOldStreetLampRenderer.renderID;
 	}
 
 }

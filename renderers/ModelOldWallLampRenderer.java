@@ -33,12 +33,12 @@ public class ModelOldWallLampRenderer extends TileEntitySpecialRenderer implemen
 		this.modelGlass = new ModelOldWallLampGlass();
 		this.modelFire = new ModelOldWallLampFire();
 		
-		this.renderID = ID;
+		ModelOldWallLampRenderer.renderID = ID;
 	}
 	
 	@Override
 	public int getRenderId() {
-		return this.renderID;
+		return ModelOldWallLampRenderer.renderID;
 	}
 	
 	private void adjustRotatePivotViaMeta(World world, int x, int y, int z) {
@@ -98,7 +98,7 @@ public class ModelOldWallLampRenderer extends TileEntitySpecialRenderer implemen
             int modulousModifier = skyLight % 65536;
             int divModifier = skyLight / 65536;
             tess.setColorOpaque_F(brightness, brightness, brightness);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,  (float) modulousModifier,  divModifier);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,  modulousModifier,  divModifier);
     }
 
 	@Override

@@ -20,6 +20,7 @@ public class ClientProxy extends CommonProxy {
 	    RenderingRegistry.registerBlockHandler(new LampRenderer());
 	}
 	
+	@Override
 	public void registerRenderers() {
 			
 			int ModelOldWallLampRendererID = RenderingRegistry.getNextAvailableRenderId();
