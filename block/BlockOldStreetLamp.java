@@ -60,10 +60,11 @@ public class BlockOldStreetLamp extends BlockContainer {
 			this.deleteLamp(world, x, y, z);
 		}
 	}
-	//TODO drop as item in some cases
+
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		if(!this.canBlockStay(par1World, par2, par3, par4)){
+			this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
 			this.deleteLamp(par1World, par2, par3, par4);
 		}
 		

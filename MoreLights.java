@@ -159,9 +159,9 @@ public class MoreLights {
 		//GAME REGISTERY
 		
 			//BLOCKS
-				GameRegistry.registerBlock(blockLEDLamp);
-				GameRegistry.registerBlock(blockOldWallLamp);
-				GameRegistry.registerBlock(blockOldStreetLamp);
+				GameRegistry.registerBlock(blockLEDLamp, "LEDLamp");
+				GameRegistry.registerBlock(blockOldWallLamp, "OldWallLamp");
+				GameRegistry.registerBlock(blockOldStreetLamp, "OldStreetLamp");
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
