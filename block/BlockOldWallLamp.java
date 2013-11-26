@@ -3,11 +3,14 @@ package morelights.block;
 import static net.minecraftforge.common.ForgeDirection.EAST;
 import static net.minecraftforge.common.ForgeDirection.NORTH;
 import static net.minecraftforge.common.ForgeDirection.SOUTH;
+import static net.minecraftforge.common.ForgeDirection.UP;
 import static net.minecraftforge.common.ForgeDirection.WEST;
 
 import java.util.List;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import morelights.MoreLights;
 import morelights.lib.Reference;
 import morelights.renderers.ModelOldWallLampRenderer;
 import morelights.tileentity.TileBlockOldWallLamp;
@@ -49,16 +52,40 @@ public class BlockOldWallLamp extends BlockContainer{
 		return false;
 	}
 	
+	/*
+	 * Bugy:
+	 * - divne sklo pri recompilaci
+	 */
+	
 	@Override
-	public void onBlockAdded(World par1World, int par2, int par3, int par4)
-    {
-        super.onBlockAdded(par1World, par2, par3, par4);
-        this.setDefaultDirection(par1World, par2, par3, par4);
-    }
+	public boolean canBlockStay(World world, int x, int y, int z)
+	{
+		byte meta = (byte) world.getBlockMetadata(x, y, z);
+		switch(meta){
+		case 4:
+			if(isBlockSolidOnSide(world, x - 1, y, z, EAST ))
+				return true;
+			return false;
+		case 5:
+			if(isBlockSolidOnSide(world, x + 1, y, z, WEST ))
+				return true;
+			return false;
+		case 3:
+			if(isBlockSolidOnSide(world, x, y, z - 1, SOUTH ))
+				return true;
+			return false;
+		case 2:
+			if(isBlockSolidOnSide(world, x, y, z + 1, NORTH ))
+				return true;
+			return false;
+		default:
+			return false;
+		}
+	}
 	
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-		if(!this.canPlaceBlockAt(par1World, par2, par3, par4)){
+		if(!this.canBlockStay(par1World, par2, par3, par4)){
 			this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
 			par1World.setBlockToAir(par2, par3, par4);
 		}
@@ -71,12 +98,6 @@ public class BlockOldWallLamp extends BlockContainer{
                par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST ) ||
                par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH) ||
                par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH);
-    }
-	
-	@Override
-	public boolean canBlockStay(World par1World, int par2, int par3, int par4)
-    {
-        return this.canPlaceBlockAt(par1World, par2, par3, par4);
     }
 	
 	@Override
@@ -94,54 +115,24 @@ public class BlockOldWallLamp extends BlockContainer{
     {
         if (par5 == 3)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
         }
 
         if (par5 == 5)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
         }
 
         if (par5 == 4)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 3, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 5, 2);
         }
 
         if (par5 == 2)
         {
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, 4, 2);
+            par1World.setBlockMetadataWithNotify(par2, par3, par4, 2, 2);
         }
         return par1World.getBlockMetadata(par2, par3, par4);
-    }
-	
-	private void setDefaultDirection(World par1World, int par2, int par3, int par4)
-    {
-        if (!par1World.isRemote)
-        {
-            byte b0 = 3;
-
-            if (par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH))
-            {
-                b0 = 3;
-            }
-
-            if (par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH))
-            {
-                b0 = 2;
-            }
-
-            if (par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST ))
-            {
-                b0 = 5;
-            }
-
-            if (par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST ))
-            {
-                b0 = 4;
-            }
-
-            par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
-        }
     }
 	
 	 @Override
