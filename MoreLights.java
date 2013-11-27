@@ -94,7 +94,7 @@ public class MoreLights {
 		blockLEDBase = new BlockLamp(blockLEDBaseID, Material.portal)
 			.setUnlocalizedName("LEDBase");
 		
-		blockOldWallLamp = new BlockOldWallLamp(blockOldWallLampID, Material.glass)
+		blockOldWallLamp = new BlockOldWallLamp(blockOldWallLampID, Material.coral)
 			.setUnlocalizedName("OldWallLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
 			.setHardness(0.8F)
