@@ -1,6 +1,7 @@
 package morelights;
 
 import morelights.block.BlockLamp;
+import morelights.block.BlockModernDecLamp;
 import morelights.block.BlockOldStreetLamp;
 import morelights.block.BlockOldWallLamp;
 import morelights.block.BlockOverlayLamp;
@@ -59,6 +60,9 @@ public class MoreLights {
 	public static Block blockStreetLampLight;
 	public int blockStreetLampLightID;
 	
+	public static Block blockModernDecLamp;
+	public int blockModernDecLampID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -68,12 +72,13 @@ public class MoreLights {
 		config.load();
 		
 		//BLOCK IDs
-		blockLEDLampID = config.getBlock("blockLEDLamp", 700).getInt();
-		blockLEDBaseID = config.getBlock("blockLEDbase", 701).getInt();
-		blockOldWallLampID = config.getBlock("blockOldeWallLamp", 702).getInt();
-		blockOldStreetLampID = config.getBlock("blockOldStreetLamp", 703).getInt();
-		blockStreetLampPartID = config.getBlock("blockStreetLampPartID", 704).getInt();
-		blockStreetLampLightID = config.getBlock("blockStreetLampLight", 705).getInt();
+		blockLEDLampID = config.getBlock("LEDLamp", 700).getInt();
+		blockLEDBaseID = config.getBlock("LEDbase", 701).getInt();
+		blockOldWallLampID = config.getBlock("OldeWallLamp", 702).getInt();
+		blockOldStreetLampID = config.getBlock("OldStreetLamp", 703).getInt();
+		blockStreetLampPartID = config.getBlock("StreetLampPartID", 704).getInt();
+		blockStreetLampLightID = config.getBlock("StreetLampLight", 705).getInt();
+		blockModernDecLampID = config.getBlock("ModernDecLamp", 707).getInt();
 		
 		//ITEM IDs
 		
@@ -87,7 +92,7 @@ public class MoreLights {
 		blockLEDLamp = new BlockOverlayLamp(blockLEDLampID, Material.portal)
 			.setUnlocalizedName("LEDLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
-			.setHardness(1.0F)
+			.setHardness(0.4F)
 			.setResistance(1.5F)
 			.setStepSound(Block.soundStoneFootstep);
 		
@@ -97,27 +102,34 @@ public class MoreLights {
 		blockOldWallLamp = new BlockOldWallLamp(blockOldWallLampID, Material.coral)
 			.setUnlocalizedName("OldWallLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
-			.setHardness(0.8F)
+			.setHardness(0.4F)
 			.setResistance(1.5F)
 			.setStepSound(Block.soundMetalFootstep);
 		
 		blockOldStreetLamp = new BlockOldStreetLamp(blockOldStreetLampID, Material.portal)
 			.setUnlocalizedName("OldStreetLamp")
 			.setCreativeTab(CreativeTabs.tabDecorations)
-			.setHardness(1F)
+			.setHardness(0.5F)
 			.setResistance(1.8F)
 			.setStepSound(Block.soundMetalFootstep);
 		
 		blockStreetLampPart = new BlockStreetLampPart(blockStreetLampPartID, Material.portal)
 			.setUnlocalizedName("StreetLampPart")
-			.setHardness(1F)
+			.setHardness(0.5F)
 			.setResistance(1.8F)
 			.setStepSound(Block.soundMetalFootstep);
 		
 		blockStreetLampLight = new BlockStreetLampLight(blockStreetLampLightID, Material.portal)
 			.setUnlocalizedName("StreetLampLight")
-			.setHardness(1F)
+			.setHardness(0.5F)
 			.setResistance(1.8F)
+			.setStepSound(Block.soundMetalFootstep);
+		
+		blockModernDecLamp = new BlockModernDecLamp(blockModernDecLampID, Material.coral)
+			.setUnlocalizedName("ModernDecLamp")
+			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(0.4F)
+			.setResistance(0.4F)
 			.setStepSound(Block.soundMetalFootstep);
 		
 		//CREATING ITEMS
@@ -162,6 +174,7 @@ public class MoreLights {
 				GameRegistry.registerBlock(blockLEDLamp, "LEDLamp");
 				GameRegistry.registerBlock(blockOldWallLamp, "OldWallLamp");
 				GameRegistry.registerBlock(blockOldStreetLamp, "OldStreetLamp");
+				GameRegistry.registerBlock(blockModernDecLamp, "ModernDecLamp");
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
@@ -172,6 +185,7 @@ public class MoreLights {
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
 			LanguageRegistry.addName(blockOldWallLamp, "Old Wall Lamp");
 			LanguageRegistry.addName(blockOldStreetLamp, "Old Street Lamp");
+			LanguageRegistry.addName(blockModernDecLamp, "Modern Decorative Lamp");
 			
 	}
 	

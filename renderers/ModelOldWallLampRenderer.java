@@ -54,7 +54,7 @@ public class ModelOldWallLampRenderer extends TileEntitySpecialRenderer implemen
         GL11.glPushMatrix();
         //This is setting the initial location.
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        GL11.glDisable(GL11.GL_CULL_FACE);
+       
         //Use in 1.6.2  this
         ResourceLocation textures = (new ResourceLocation(Reference.modid + ":textures/models/ModelOldWallLamp.png")); 
         Minecraft.getMinecraft().renderEngine.bindTexture(textures);
@@ -77,14 +77,15 @@ public class ModelOldWallLampRenderer extends TileEntitySpecialRenderer implemen
         	break;
         }
         
-        this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        GL11.glEnable(GL11.GL_BLEND);       
+        GL11.glDisable(GL11.GL_CULL_FACE);
+        this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);     
+        GL11.glEnable(GL11.GL_BLEND);  
         GL11.glScalef(0.7F, 1F, 0.7F);
         this.modelFire.render((Entity)null,  0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.015625F);
         GL11.glScalef(1F/0.7F, 1F, 1F/0.7F);
         this.modelGlass.render((Entity)null, 0F, 0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-
         GL11.glDisable(GL11.GL_BLEND);
+        
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

@@ -52,30 +52,25 @@ public class BlockOldWallLamp extends BlockContainer{
 		return false;
 	}
 	
-	/*
-	 * Bugy:
-	 * - divne sklo pri recompilaci
-	 */
-	
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z)
 	{
 		byte meta = (byte) world.getBlockMetadata(x, y, z);
 		switch(meta){
 		case 4:
-			if(isBlockSolidOnSide(world, x - 1, y, z, EAST ))
+			if(world.isBlockSolidOnSide(x - 1, y, z, EAST ))
 				return true;
 			return false;
 		case 5:
-			if(isBlockSolidOnSide(world, x + 1, y, z, WEST ))
+			if(world.isBlockSolidOnSide(x + 1, y, z, WEST ))
 				return true;
 			return false;
 		case 3:
-			if(isBlockSolidOnSide(world, x, y, z - 1, SOUTH ))
+			if(world.isBlockSolidOnSide(x, y, z - 1, SOUTH ))
 				return true;
 			return false;
 		case 2:
-			if(isBlockSolidOnSide(world, x, y, z + 1, NORTH ))
+			if(world.isBlockSolidOnSide(x, y, z + 1, NORTH ))
 				return true;
 			return false;
 		default:
