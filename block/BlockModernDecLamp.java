@@ -1,5 +1,6 @@
 package morelights.block;
 
+import morelights.lib.Pix;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ public class BlockModernDecLamp extends Block {
 	public BlockModernDecLamp(int id, Material par2Material) {
 		super(id, par2Material);
 		this.setLightValue(1.0F);
+		this.setBlockBounds(Pix.FOUR + Pix.ONE/2, 0, Pix.FOUR + Pix.ONE/2, Pix.ELEVEN + Pix.ONE/2, Pix.TWELVE, Pix.ELEVEN + Pix.ONE/2);
 	}
 	
 	@Override
