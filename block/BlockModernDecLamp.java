@@ -1,11 +1,13 @@
 package morelights.block;
 
+import static net.minecraftforge.common.ForgeDirection.UP;
 import morelights.lib.Pix;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -32,6 +34,20 @@ public class BlockModernDecLamp extends Block {
 	public boolean renderAsNormalBlock(){
 		return false;
 	}
+	
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+		if(!this.canPlaceBlockAt(par1World, par2, par3, par4)){
+			par1World.setBlockToAir(par2, par3, par4);
+			this.dropBlockAsItem(par1World, par2, par3, par4, 0, 0);
+		}
+	}
+	
+	@Override
+	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {		
+        return par1World.isBlockSolidOnSide(par2, par3 - 1, par4, UP);
+    }
 	
 	@Override
 	@SideOnly(Side.CLIENT)
