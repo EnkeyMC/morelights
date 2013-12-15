@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import easytessellator.EasyTess;
 
 public class ModernDecLampRenderer implements ISimpleBlockRenderingHandler {
 
@@ -100,9 +101,8 @@ public class ModernDecLampRenderer implements ISimpleBlockRenderingHandler {
 		this.renderPosXLight(tes, x, y, z, minU, minV, p, pv);
 		this.renderNegXLight(tes, x, y, z, minU, minV, p, pv);
 		this.renderTopLight(tes, x, y, z, minU, minV, p, pv);
-		this.renderBottomLight(tes, x, y, z, minU, minV, p, pv);
-		
-		
+		this.renderBottomLight(tes, x, y, z, minU, minV, p, pv);		
+				
 		return true;
 	}
 	

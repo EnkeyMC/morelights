@@ -2,6 +2,7 @@ package morelights;
 
 import morelights.block.BlockLamp;
 import morelights.block.BlockModernDecLamp;
+import morelights.block.BlockModernWallLamp;
 import morelights.block.BlockOldStreetLamp;
 import morelights.block.BlockOldWallLamp;
 import morelights.block.BlockOverlayLamp;
@@ -63,6 +64,9 @@ public class MoreLights {
 	public static Block blockModernDecLamp;
 	public int blockModernDecLampID;
 	
+	public static Block blockModernWallLamp;
+	public int blockModernWallLampID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -79,6 +83,7 @@ public class MoreLights {
 		blockStreetLampPartID = config.getBlock("StreetLampPartID", 704).getInt();
 		blockStreetLampLightID = config.getBlock("StreetLampLight", 705).getInt();
 		blockModernDecLampID = config.getBlock("ModernDecLamp", 707).getInt();
+		blockModernWallLampID = config.getBlock("ModernWallLamp", 708).getInt();
 		
 		//ITEM IDs
 		
@@ -132,6 +137,13 @@ public class MoreLights {
 			.setResistance(0.4F)
 			.setStepSound(Block.soundMetalFootstep);
 		
+		blockModernWallLamp = new BlockModernWallLamp(blockModernWallLampID, Material.coral)
+			.setUnlocalizedName("ModernWallLamp")
+			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(0.4F)
+			.setResistance(0.4F)
+			.setStepSound(Block.soundMetalFootstep);
+		
 		//CREATING ITEMS
 		
 		//SHAPELESS CRAFTING RECIPES
@@ -165,6 +177,16 @@ public class MoreLights {
 				'L', blockOldWallLamp,
 				'S', Block.stone
 			});
+			
+			GameRegistry.addShapedRecipe(new ItemStack(blockModernDecLamp, 4, 0), new Object[]{
+				" W ",
+				"GSG",
+				" I ",
+				'W', new ItemStack(Block.carpet, 1, 4),
+				'G', Block.glass,
+				'S', Block.glowStone,
+				'I', Item.ingotIron
+			});
 		
 		//SMELTING RECIPES
 		
@@ -175,6 +197,7 @@ public class MoreLights {
 				GameRegistry.registerBlock(blockOldWallLamp, "OldWallLamp");
 				GameRegistry.registerBlock(blockOldStreetLamp, "OldStreetLamp");
 				GameRegistry.registerBlock(blockModernDecLamp, "ModernDecLamp");
+				GameRegistry.registerBlock(blockModernWallLamp, "ModernWallLamp");
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
@@ -186,13 +209,13 @@ public class MoreLights {
 			LanguageRegistry.addName(blockOldWallLamp, "Old Wall Lamp");
 			LanguageRegistry.addName(blockOldStreetLamp, "Old Street Lamp");
 			LanguageRegistry.addName(blockModernDecLamp, "Modern Decorative Lamp");
+			LanguageRegistry.addName(blockModernWallLamp, "Modern Decorative Wall Lamp");
 			
 	}
 	
 	@EventHandler
 	public void PostInit(FMLPostInitializationEvent event){
 		proxy.registerRenderers();
-		ClientProxy.setCustomRenderers();
 	}
 
 }
