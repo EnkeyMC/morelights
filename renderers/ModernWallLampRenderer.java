@@ -15,12 +15,11 @@ public class ModernWallLampRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
-		//TODO render it properly
 		Tessellator tes = Tessellator.instance;
 		 
 	    tes.startDrawingQuads();
 	    
-	    tes.addTranslation(-1F, -0.5F, -1F);
+	    tes.addTranslation(-0.7F, -0.5F, -1F);
 		
 		int x = 0;
 		int y = 0;
@@ -32,7 +31,7 @@ public class ModernWallLampRenderer implements ISimpleBlockRenderingHandler {
 		
 		EasyTess.renderCube(x + Pix.TWO, y + Pix.SIX, z + Pix.TWELVE, 12, 4, 4, 0, 0, icon, 5, 32, 32);
 		
-		tes.addTranslation(1F, 0.5F, 1F);
+		tes.addTranslation(0.7F, 0.5F, 1F);
 		
 	    tes.draw();
 	}
