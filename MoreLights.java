@@ -1,5 +1,6 @@
 package morelights;
 
+import morelights.block.BlockFluorescentLamp;
 import morelights.block.BlockLamp;
 import morelights.block.BlockModernDecLamp;
 import morelights.block.BlockModernWallLamp;
@@ -67,6 +68,9 @@ public class MoreLights {
 	public static Block blockModernWallLamp;
 	public int blockModernWallLampID;
 	
+	public static Block blockFluorescentLamp;
+	public int blockFluorescentLampID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -84,6 +88,7 @@ public class MoreLights {
 		blockStreetLampLightID = config.getBlock("StreetLampLight", 705).getInt();
 		blockModernDecLampID = config.getBlock("ModernDecLamp", 707).getInt();
 		blockModernWallLampID = config.getBlock("ModernWallLamp", 708).getInt();
+		blockFluorescentLampID = config.getBlock("FluorescentLamp", 709).getInt();
 		
 		//ITEM IDs
 		
@@ -144,6 +149,13 @@ public class MoreLights {
 			.setResistance(0.4F)
 			.setStepSound(Block.soundMetalFootstep);
 		
+		blockFluorescentLamp = new BlockFluorescentLamp(blockFluorescentLampID, Material.coral)
+			.setUnlocalizedName("FluorescentLamp")
+			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(0.4F)
+			.setResistance(0.4F)
+			.setStepSound(Block.soundMetalFootstep);
+		
 		//CREATING ITEMS
 		
 		//SHAPELESS CRAFTING RECIPES
@@ -178,6 +190,7 @@ public class MoreLights {
 				'S', Block.stone
 			});
 			
+			//Modern Decorative Lamp
 			GameRegistry.addShapedRecipe(new ItemStack(blockModernDecLamp, 4, 0), new Object[]{
 				" W ",
 				"GSG",
@@ -198,6 +211,7 @@ public class MoreLights {
 				GameRegistry.registerBlock(blockOldStreetLamp, "OldStreetLamp");
 				GameRegistry.registerBlock(blockModernDecLamp, "ModernDecLamp");
 				GameRegistry.registerBlock(blockModernWallLamp, "ModernWallLamp");
+				GameRegistry.registerBlock(blockFluorescentLamp, "FluorescentLamp");
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
@@ -210,6 +224,7 @@ public class MoreLights {
 			LanguageRegistry.addName(blockOldStreetLamp, "Old Street Lamp");
 			LanguageRegistry.addName(blockModernDecLamp, "Modern Decorative Lamp");
 			LanguageRegistry.addName(blockModernWallLamp, "Modern Decorative Wall Lamp");
+			LanguageRegistry.addName(blockFluorescentLamp, "Fluorescent Lamp");
 			
 	}
 	

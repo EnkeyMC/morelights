@@ -1,5 +1,6 @@
 package morelights.proxy;
 
+import morelights.renderers.FluorescentLampRenderer;
 import morelights.renderers.LampRenderer;
 import morelights.renderers.ModelOldStreetLampRenderer;
 import morelights.renderers.ModelOldWallLampRenderer;
@@ -17,6 +18,7 @@ public class ClientProxy extends CommonProxy {
 	public static int oldWallLampRendererType;
 	public static int ModernDecLampType;
 	public static int ModernWallLampType;
+	public static int FluorescentLampType;
 	
 	@Override
 	public void registerRenderers() {
@@ -28,6 +30,9 @@ public class ClientProxy extends CommonProxy {
 		    
 		    ModernWallLampType = RenderingRegistry.getNextAvailableRenderId();
 		    RenderingRegistry.registerBlockHandler(new ModernWallLampRenderer());
+		    
+		    FluorescentLampType = RenderingRegistry.getNextAvailableRenderId();
+		    RenderingRegistry.registerBlockHandler(new FluorescentLampRenderer());
 	    
 			int ModelOldWallLampRendererID = RenderingRegistry.getNextAvailableRenderId();
 		    ModelOldWallLampRenderer OldWallLampRender = new ModelOldWallLampRenderer(ModelOldWallLampRendererID); 
