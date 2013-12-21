@@ -1,20 +1,10 @@
 package morelights;
 
-import morelights.block.BlockFluorescentLamp;
-import morelights.block.BlockLamp;
-import morelights.block.BlockModernDecLamp;
-import morelights.block.BlockModernWallLamp;
-import morelights.block.BlockOldStreetLamp;
-import morelights.block.BlockOldWallLamp;
-import morelights.block.BlockOverlayLamp;
-import morelights.block.BlockStreetLampLight;
-import morelights.block.BlockStreetLampPart;
+import morelights.block.*;
 import morelights.lib.Reference;
 import morelights.proxy.ClientProxy;
 import morelights.proxy.CommonProxy;
-import morelights.tileentity.TileBlockOldStreetLamp;
-import morelights.tileentity.TileBlockOldWallLamp;
-import morelights.tileentity.TileOverlayLamp;
+import morelights.tileentity.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -71,6 +61,12 @@ public class MoreLights {
 	public static Block blockFluorescentLamp;
 	public int blockFluorescentLampID;
 	
+	public static Block blockAirLight;
+	public int blockAirLightID;
+	
+	public static Block blockReflector;
+	public int blockReflectorID;
+	
 	//ITEMS
 	
 	@EventHandler
@@ -80,15 +76,17 @@ public class MoreLights {
 		config.load();
 		
 		//BLOCK IDs
-		blockLEDLampID = config.getBlock("LEDLamp", 700).getInt();
-		blockLEDBaseID = config.getBlock("LEDbase", 701).getInt();
-		blockOldWallLampID = config.getBlock("OldeWallLamp", 702).getInt();
-		blockOldStreetLampID = config.getBlock("OldStreetLamp", 703).getInt();
-		blockStreetLampPartID = config.getBlock("StreetLampPartID", 704).getInt();
-		blockStreetLampLightID = config.getBlock("StreetLampLight", 705).getInt();
-		blockModernDecLampID = config.getBlock("ModernDecLamp", 707).getInt();
-		blockModernWallLampID = config.getBlock("ModernWallLamp", 708).getInt();
-		blockFluorescentLampID = config.getBlock("FluorescentLamp", 709).getInt();
+		blockLEDLampID = config.getBlock("LED Lamp", 700).getInt();
+		blockLEDBaseID = config.getBlock("LED base", 701).getInt();
+		blockOldWallLampID = config.getBlock("Old Wall Lamp", 702).getInt();
+		blockOldStreetLampID = config.getBlock("Old Street Lamp", 703).getInt();
+		blockStreetLampPartID = config.getBlock("Street Lamp Part", 704).getInt();
+		blockStreetLampLightID = config.getBlock("Street Lamp Light", 705).getInt();
+		blockModernDecLampID = config.getBlock("Modern Dec Lamp", 707).getInt();
+		blockModernWallLampID = config.getBlock("Modern Wall Lamp", 708).getInt();
+		blockFluorescentLampID = config.getBlock("Fluorescent Lamp", 709).getInt();
+		blockAirLightID = config.getBlock("Air Light", 710).getInt();
+		blockReflectorID = config.getBlock("Reflector", 711).getInt();
 		
 		//ITEM IDs
 		
@@ -156,6 +154,17 @@ public class MoreLights {
 			.setResistance(0.4F)
 			.setStepSound(Block.soundMetalFootstep);
 		
+		blockAirLight = new BlockAirLight(blockAirLightID, Material.air)
+			.setUnlocalizedName("AirLight")
+			.setCreativeTab(CreativeTabs.tabDecorations);
+		
+		blockReflector = new BlockReflector(blockReflectorID, Material.coral)
+			.setUnlocalizedName("Reflector")
+			.setCreativeTab(CreativeTabs.tabDecorations)
+			.setHardness(0.4F)
+			.setResistance(0.4F)
+			.setStepSound(Block.soundMetalFootstep);
+		
 		//CREATING ITEMS
 		
 		//SHAPELESS CRAFTING RECIPES
@@ -212,12 +221,15 @@ public class MoreLights {
 				GameRegistry.registerBlock(blockModernDecLamp, "ModernDecLamp");
 				GameRegistry.registerBlock(blockModernWallLamp, "ModernWallLamp");
 				GameRegistry.registerBlock(blockFluorescentLamp, "FluorescentLamp");
+				GameRegistry.registerBlock(blockAirLight, "AirLight");
+				GameRegistry.registerBlock(blockReflector, "Reflector");
 				
 			//TILE ENTITIES
 				GameRegistry.registerTileEntity(TileOverlayLamp.class, "OverlayLamp");
 				GameRegistry.registerTileEntity(TileBlockOldWallLamp.class, "OldWallLamp");
 				GameRegistry.registerTileEntity(TileBlockOldStreetLamp.class, "OldStreetLamp");
-				
+				GameRegistry.registerTileEntity(TileBlockReflector.class, "Reflector");
+						
 		//LANGUAGE REGISTRY
 			LanguageRegistry.addName(blockLEDLamp, "LED Lamp");
 			LanguageRegistry.addName(blockOldWallLamp, "Old Wall Lamp");
@@ -225,6 +237,7 @@ public class MoreLights {
 			LanguageRegistry.addName(blockModernDecLamp, "Modern Decorative Lamp");
 			LanguageRegistry.addName(blockModernWallLamp, "Modern Decorative Wall Lamp");
 			LanguageRegistry.addName(blockFluorescentLamp, "Fluorescent Lamp");
+			LanguageRegistry.addName(blockReflector, "Reflector");
 			
 	}
 	
