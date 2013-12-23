@@ -1,5 +1,6 @@
 package morelights.model;
 
+import morelights.renderers.ModelReflectorRenderer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -116,9 +117,26 @@ public class ModelReflector extends ModelBase
     model.rotateAngleZ = z;
   }
   
+  private void setRotation(ModelRenderer model, float z)
+  {
+	  model.rotateAngleZ = z;
+  }
+  
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+    
+    this.setRotation(this.ref1, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref2, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref3, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref4, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref5, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref6, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref7, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref8, f2 * ((float) Math.PI / 180) + 1.047198F);
+    this.setRotation(this.ref9, f2 * ((float) Math.PI / 180) - 1.047198F);
+    this.setRotation(this.ref10, f2 * ((float) Math.PI / 180));
+    this.setRotation(this.ref11, f2 * ((float) Math.PI / 180));
   }
 
 }
