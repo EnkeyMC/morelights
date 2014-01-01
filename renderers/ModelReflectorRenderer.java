@@ -38,22 +38,36 @@ public class ModelReflectorRenderer extends TileEntitySpecialRenderer implements
 	public void renderInventoryBlock(Block block, int metadata, int modelID,
 			RenderBlocks renderer) {
 		
+		GL11.glPushMatrix();
+        GL11.glTranslatef(0, 1.25F, 0);
+        
+        ResourceLocation textures = (new ResourceLocation(Reference.modid + ":textures/models/ModelReflector.png")); 
+        Minecraft.getMinecraft().renderEngine.bindTexture(textures);
+        GL11.glPushMatrix();
+        GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+        GL11.glRotatef(90F, 0, 1F, 0);
+        
+        this.model.render((Entity)null, 0.0F, 0.0F, 0F, 0.0F, 0.0F, 0.0625F);  
+        this.modelStand.render((Entity)null, 0.0F, 0.0F, 0F, 0.0F, 0.0F, 0.0625F);     
+
+        GL11.glPopMatrix();
+        GL11.glPopMatrix();
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z,
 			Block block, int modelId, RenderBlocks renderer) {
-		return true;
-	}
-
-	@Override
-	public boolean shouldRender3DInInventory() {
 		return false;
 	}
 
 	@Override
+	public boolean shouldRender3DInInventory() {
+		return true;
+	}
+
+	@Override
 	public int getRenderId() {
-		return ClientProxy.ReflectorType;
+		return this.renderID;
 	}
 
 	@Override
@@ -95,10 +109,10 @@ public class ModelReflectorRenderer extends TileEntitySpecialRenderer implements
         	boolean m = te.moves;
         	if(m){
         		te.rotation -= f * speed;
-        	}
-        	if(te.rotation < 0F){
-        		te.moves = false;
-        		te.rotation = 0f;
+	        	if(te.rotation <= 0F){
+	        		te.moves = false;
+	        		te.rotation = 0f;
+	        	}
         	}
         }else{
         	te.rotation = 90F;

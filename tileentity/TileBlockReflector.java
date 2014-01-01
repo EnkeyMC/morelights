@@ -3,6 +3,7 @@ package morelights.tileentity;
 import morelights.MoreLights;
 import morelights.block.BlockReflector;
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileBlockReflector extends TileEntity {
@@ -13,15 +14,24 @@ public class TileBlockReflector extends TileEntity {
 	
 	public void updateEntity() {
 		int meta = this.getBlockMetadata();
-		if((this.isPowered)&&(!this.moves)){	
+		if(this.isPowered){	
 			this.lenght = this.lightUp(meta);
-			System.out.println(lenght);
 		}else{
 			this.deleteLight(meta);
 		}
 	}
 	
-	private void deleteLight(int meta){
+	public void readFromNBT(NBTTagCompound NBT){
+		super.readFromNBT(NBT);
+		isPowered = NBT.getBoolean("powered");
+	}
+	
+	public void writeToNBT(NBTTagCompound NBT){
+		super.writeToNBT(NBT);
+		NBT.setBoolean("powered", isPowered);
+	}
+	
+	public void deleteLight(int meta){
 		int id;
 		switch(meta){
 		case 2:

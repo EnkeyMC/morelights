@@ -93,7 +93,7 @@ public class MoreLights {
 		//ITEM IDs
 		
 		//OTHER
-		reflectorLength = config.get("Other", "Reflector Length", 32, "Determines how many block the reflector shine (more blocks = more lag) max is 32, minimal is 5").getInt();
+		reflectorLength = config.get("Other", "Reflector Length", 32, "Determines how many blocks the reflector shine (more blocks = more lag) max is 32, minimal is 5").getInt();
 		if(reflectorLength > 32){
 			reflectorLength = 32;
 		}else if(reflectorLength < 5){

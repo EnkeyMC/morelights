@@ -1,5 +1,7 @@
 package morelights.block;
 
+import java.util.Random;
+
 import morelights.lib.Reference;
 import morelights.renderers.ModelReflectorRenderer;
 import morelights.tileentity.TileBlockReflector;
@@ -11,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -104,6 +107,16 @@ public class BlockReflector extends BlockContainer {
 			((TileBlockReflector)par1World.getBlockTileEntity(par2, par3, par4)).isPowered = false;
 		}
 	}
+	
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, par1World.getBlockTileEntity(par2, par3, par4).getBlockMetadata());
+	}
+
+    public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+    	TileBlockReflector te = (TileBlockReflector)par1World.getBlockTileEntity(par2, par3, par4);
+    	System.out.println(te);
+    	//te.deleteLight(par5);
+    }
 	
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -17,11 +17,9 @@ public class ClientProxy extends CommonProxy {
 	
 	public static int renderPass;
 	public static int lampRenderType;
-	public static int oldWallLampRendererType;
 	public static int ModernDecLampType;
 	public static int ModernWallLampType;
 	public static int FluorescentLampType;
-	public static int ReflectorType;
 	
 	@Override
 	public void registerRenderers() {
